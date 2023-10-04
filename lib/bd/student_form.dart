@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
 import 'package:get_student/bd/db_functions.dart';
 import 'package:get_student/model/studentmodel.dart';
+
+import '../screens/form.dart';
 
 class Formfuctions extends GetxController{
   final nameController=TextEditingController();
@@ -16,6 +18,7 @@ class Formfuctions extends GetxController{
 Future<void>isupdate(int index)async{
   final studentDB=Get.put(StudentDB());
   await studentDB.showAllDetail();
+    imageController.imgpath.value= StudentDB().student[index].profile;
   nameController.text=studentDB.student[index].name;
   emailController.text=studentDB.student[index].email;
   ageController.text=studentDB.student[index].age.toString();
@@ -27,10 +30,12 @@ Future<void>isupdate(int index)async{
    Future<void>submitdata()async{
     final studentObject= Studentmodel(
       id:DateTime.now() ,
+        profile:imageController.imgpath.value ,
        name: nameController.text.trim(),
         email: emailController.text.trim(), 
         age:int.parse( ageController.text.trim()), 
         number: int.parse(numbercontroller.text.trim()),
+
     );
     await StudentDB().addAllStudent(studentObject);
     reset();
@@ -39,13 +44,14 @@ Future<void>isupdate(int index)async{
     Get.back();
    }
 
-   Future<void>Update(int index)async{
+   Future<void>updateData(int index)async{
     final studentObject =Studentmodel(
       id:DateTime.now() ,
        name: nameController.text.trim(),
         email: emailController.text.trim(), 
         age:int.parse( ageController.text.trim()), 
         number: int.parse(numbercontroller.text.trim()),
+        profile: imageController.imgpath.value
     );
     await StudentDB().edit(index,studentObject);
     final studentDB=Get.put(StudentDB());

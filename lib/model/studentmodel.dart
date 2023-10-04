@@ -14,10 +14,13 @@ class Studentmodel {
   final int age;
   @HiveField(4)
   final int number;
+  @HiveField(5)
+  final String profile;
   Studentmodel(
       {required this.id,
       required this.name,
       required this.email,
       required this.age,
-      required this.number});
+      required this.number,
+      required this.profile});
 }

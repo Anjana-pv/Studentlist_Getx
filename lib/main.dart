@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get_student/screens/form.dart';
 
-import 'package:get_student/screens/formAdd.dart';
+import 'package:get_student/screens/home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
@@ -22,12 +23,17 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+       primarySwatch: Colors.indigo,brightness: Brightness.dark
+        ,
         useMaterial3: true,
       ),
+      initialRoute: '/'
+      ,
+      getPages: [
+        GetPage(name: '/', page: ()=> Home()),
+      ],
       debugShowCheckedModeBanner: false,
-      home: const Home() ,
+   
     );
   }
 }
